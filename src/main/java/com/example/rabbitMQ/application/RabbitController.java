@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 public class RabbitController {
 
@@ -23,10 +25,10 @@ public class RabbitController {
     }
 
     @PostMapping("/emit")
-    public ResponseEntity<String> emit(@RequestBody String message) {
+    public ResponseEntity<String> emit(@RequestBody Map<String,String>map) {
         logger.info("Emit to myQueue");
-        template.setExchange("common exchange");
-        template.convertAndSend(message);
+        template.setExchange("direct exchange");
+        template.convertAndSend(map.get("key"),map.get("message"));
         return ResponseEntity.ok("Success emit to queue");
     }
 }
