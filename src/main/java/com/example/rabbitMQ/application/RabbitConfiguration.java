@@ -9,7 +9,6 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -43,17 +42,19 @@ public class RabbitConfiguration {
     public Queue myQueue2() {
         return new Queue("myQueue2");
     }
+
     @Bean
-    public FanoutExchange fanoutExchange(){
+    public FanoutExchange fanoutExchange() {
         return new FanoutExchange("common exchange");
     }
 
     @Bean
-    public Binding binding1(){
+    public Binding binding1() {
         return BindingBuilder.bind(myQueue1()).to(fanoutExchange());
     }
+
     @Bean
-    public Binding binding2(){
+    public Binding binding2() {
         return BindingBuilder.bind(myQueue2()).to(fanoutExchange());
     }
 //    @Bean

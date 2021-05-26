@@ -13,11 +13,12 @@ public class RabbitMQListener {
     Logger logger = LoggerFactory.getLogger(RabbitMQListener.class);
 
     @RabbitListener(queues = "myQueue1")
-    public void  processMyQueue(String message){
+    public void processMyQueue(String message) {
         logger.info("Received first from myQueue: {}", message);
     }
+
     @RabbitListener(queues = "myQueue2")
-    public void  processMyQueue2(String message){
+    public void processMyQueue2(String message) {
         logger.info("Received second from myQueue: {}", message);
     }
 }
