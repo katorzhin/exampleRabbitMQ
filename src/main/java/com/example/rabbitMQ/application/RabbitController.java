@@ -27,7 +27,7 @@ public class RabbitController {
     @PostMapping("/emit")
     public ResponseEntity<String> emit(@RequestBody Map<String,String>map) {
         logger.info("Emit to myQueue");
-        template.setExchange("direct exchange");
+        template.setExchange("topic exchange");
         template.convertAndSend(map.get("key"),map.get("message"));
         return ResponseEntity.ok("Success emit to queue");
     }
